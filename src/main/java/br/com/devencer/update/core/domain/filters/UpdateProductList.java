@@ -11,7 +11,9 @@ import br.com.devencer.update.driven.local.LocalData;
 import br.com.devencer.update.driven.sourceupdate.UpdateData;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UpdateProductList {
   private List<Product> allDataFromExternalSource = new ArrayList<>();
   private List<Product> allDataFromLocalSource = new ArrayList<>();
@@ -31,7 +33,7 @@ public class UpdateProductList {
   }
 
   private void mapReturnList() {
-    allDataFromExternalSource.forEach(product -> returnList.add(Mapper.getMap(product)));
+    allDataFromExternalSource.forEach(product -> returnList.add(new Mapper().getMap(product)));
   }
 
   public UpdateProductList(UpdateData externalSource, LocalData localSource) {

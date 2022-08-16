@@ -9,4 +9,9 @@ public class AdapterUpdateCollector implements UpdateData{
     return null;
   }
 
+  @Override
+  public void setProducts(List<Product> updateProductList) {
+
+  }
+
 }

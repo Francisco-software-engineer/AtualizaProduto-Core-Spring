@@ -31,7 +31,7 @@ public class UpdateProductList {
   }
 
   private void mapReturnList() {
-    allDataFromExternalSource.forEach(product -> returnList.add(Mapper.getMap(product)));
+    allDataFromExternalSource.forEach(product -> returnList.add(new Mapper().getMap(product)));
   }
 
   public UpdateProductList(UpdateData externalSource, LocalData localSource) {

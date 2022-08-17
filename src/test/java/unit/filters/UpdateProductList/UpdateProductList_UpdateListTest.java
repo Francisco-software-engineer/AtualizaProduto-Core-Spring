@@ -35,7 +35,7 @@ public class UpdateProductList_UpdateListTest {
   @BeforeEach
   void load() {
     updateListFilter.setExternalData(updateProductList).
-                     setLocalData(localProductList).
+                     setLocalData(localProductList).      
                      applyFilter();
   }
 

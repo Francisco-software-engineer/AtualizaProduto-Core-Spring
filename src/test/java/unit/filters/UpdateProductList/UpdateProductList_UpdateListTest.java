@@ -13,7 +13,6 @@ import br.com.devencer.update.driven.sourceupdate.UpdateData;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import javax.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,9 +33,7 @@ public class UpdateProductList_UpdateListTest {
       new Product(5, "9998461320323","ARROZ", new BigDecimal("99.9"))
       );
 
-  @Inject
   LocalData localData;
-  @Inject
   UpdateData updateData;
   UpdateProductList updateListFilter;
   int updateItemNumber;
@@ -44,8 +41,8 @@ public class UpdateProductList_UpdateListTest {
 
   @BeforeEach
   void load() {
-    localData.setProducts(localProductList);
-    updateData.setProducts(updateProductList);
+    localData = new AdapterLocalMock(localProductList);
+    updateData = new AdapterUpdateMock(updateProductList);
     updateListFilter = new UpdateProductList(updateData, localData);
     updateListFilter.applyFilter();
   }

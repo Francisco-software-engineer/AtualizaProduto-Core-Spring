@@ -11,52 +11,49 @@ import br.com.devencer.update.driven.local.LocalData;
 import br.com.devencer.update.driven.sourceupdate.UpdateData;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Service;
+import lombok.Builder;
 
-@Service
+@Builder
 public class UpdateProductList {
-  private List<Product> allDataFromExternalSource = new ArrayList<>();
-  private List<Product> allDataFromLocalSource = new ArrayList<>();
-
-  private List<Product> local = new ArrayList<>();
-  private List<Product_DTO> returnList = new ArrayList<>();
+  private List<Product> externalData = new ArrayList<>();
+  private List<Product> localData = new ArrayList<>();
+  private List<Product_DTO> updateList = new ArrayList<>();
 
   public void applyFilter() {
     if (!error()) {
+      reLoad();
+      //remove all content that is equal and is not necessary any update
+      externalData.removeAll(localData);
+
+      //Change Default rules
+      prepareMakeRetainAllRespectRules();
+      //if not exist in local is to add. Not to update.
+      externalData.retainAll(localData);
+
       mapReturnList();
       updateDTO();
     }
   }
 
   private void updateDTO() {
-    Report_UpdatedProducts_DTO.getInstance().setListOfProductsUpdated(returnList);
+    Report_UpdatedProducts_DTO.getInstance().setListOfProductsUpdated(updateList);
   }
 
   private void mapReturnList() {
-    allDataFromExternalSource.forEach(product -> returnList.add(new Mapper().getMap(product)));
+    externalData.forEach(product -> updateList.add(new Mapper().getMap(product)));
   }
 
-  public UpdateProductList(UpdateData externalSource, LocalData localSource) {
-    reLoad();
-    allDataFromExternalSource.addAll(externalSource.getProductList());
-    allDataFromLocalSource.addAll(localSource.getProductList());
+  public UpdateProductList() {
 
-    //remove all content that is equal and is not necessary any update
-    allDataFromExternalSource.removeAll(allDataFromLocalSource);
-
-    //Change Default rules
-    prepareMakeRetainAllRespectRules();
-    //if not exist in local is to add. Not to update.
-    allDataFromExternalSource.retainAll(allDataFromLocalSource);
   }
 
   private void prepareMakeRetainAllRespectRules() {
-    allDataFromExternalSource.forEach(product -> product.setRules(Product_Rules.COMPARE_ONLYBARCODE.getRule()));
-    allDataFromLocalSource.forEach(product -> product.setRules(Product_Rules.COMPARE_ONLYBARCODE.getRule()));
+    externalData.forEach(product -> product.setRules(Product_Rules.COMPARE_ONLYBARCODE.getRule()));
+    localData.forEach(product -> product.setRules(Product_Rules.COMPARE_ONLYBARCODE.getRule()));
   }
 
   private boolean error() {
-    if (allDataFromExternalSource.isEmpty()) {
+    if (externalData.isEmpty()) {
       //"Error: Empty update table - Nothing to update."
       emptyUpdateTable("Error: Empty source/update table");
       return true;
@@ -65,7 +62,7 @@ public class UpdateProductList {
   }
 
   private void reLoad() {
-    allDataFromExternalSource.forEach(product -> product.setRules(Product_Rules.DEFAULT.getRule()));
-    allDataFromLocalSource.forEach(product -> product.setRules(Product_Rules.DEFAULT.getRule()));
+    externalData.forEach(product -> product.setRules(Product_Rules.DEFAULT.getRule()));
+    localData.forEach(product -> product.setRules(Product_Rules.DEFAULT.getRule()));
   }
 }

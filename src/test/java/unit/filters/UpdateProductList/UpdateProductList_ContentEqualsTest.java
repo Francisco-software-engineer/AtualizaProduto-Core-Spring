@@ -13,7 +13,6 @@ import br.com.devencer.update.driven.sourceupdate.UpdateData;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import javax.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,13 +30,16 @@ public class UpdateProductList_ContentEqualsTest {
       new Product(3, "7891000064276","MUCILON ARROZ NESTLE 400G", new BigDecimal("7.99")),
       new Product(4, "7898461320323","ARROZ DOURA TIPO 1 COM 5 KG", new BigDecimal("11.5")));
 
+  LocalData localData;
+  UpdateData updateData;
   UpdateProductList updateList ;
 
 
   @BeforeEach
   void load() {
-
-    updateList = new UpdateProductList(updateData.setProducts(updateProductList), localData.setProducts(localProductList));
+    localData = new AdapterLocalMock(localProductList);
+    updateData = new AdapterUpdateMock(updateProductList);
+    updateList = new UpdateProductList(updateData, localData);;
 
   }
 

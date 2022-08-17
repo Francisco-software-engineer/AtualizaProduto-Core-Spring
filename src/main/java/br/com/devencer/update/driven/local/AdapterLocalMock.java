@@ -4,9 +4,7 @@ import br.com.devencer.update.core.domain.entity.Product;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
-@Service
 public class AdapterLocalMock implements LocalData{
   private List<Product> products = Arrays.asList(
       new Product(1, "7891008121025","CAIXA DE BOMBOM GAROTO 400G", new BigDecimal("6.99")),
@@ -16,7 +14,7 @@ public class AdapterLocalMock implements LocalData{
 
   public AdapterLocalMock() {}
 
-  public void setProducts(List<Product> products) {
+  public AdapterLocalMock(List<Product> products) {
     this.products = products;
   }
 

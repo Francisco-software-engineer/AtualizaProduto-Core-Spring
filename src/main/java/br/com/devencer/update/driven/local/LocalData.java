@@ -6,5 +6,4 @@ import java.util.List;
 public interface LocalData {
   List<Product> getProductList();
 
-  void setProducts(List<Product> localProductList);
 }

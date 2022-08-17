@@ -6,5 +6,4 @@ import java.util.List;
 public interface UpdateData {
   List<Product> getProductList();
 
-  void setProducts(List<Product> updateProductList);
 }

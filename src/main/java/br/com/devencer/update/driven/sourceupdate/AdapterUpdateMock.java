@@ -4,9 +4,7 @@ import br.com.devencer.update.core.domain.entity.Product;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
-@Service
 public class AdapterUpdateMock implements UpdateData{
   private List<Product> products = Arrays.asList(
       new Product(1, "7891008121025","CAIXA DE BOMBOM GAROTO 400G", new BigDecimal("2.99")),
@@ -19,7 +17,7 @@ public class AdapterUpdateMock implements UpdateData{
 
   public AdapterUpdateMock() {}
 
-  public void setProducts(List<Product> products) {
+  public AdapterUpdateMock(List<Product> products) {
     this.products = products;
   }
 

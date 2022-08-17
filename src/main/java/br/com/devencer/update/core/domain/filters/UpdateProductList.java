@@ -11,9 +11,7 @@ import br.com.devencer.update.driven.local.LocalData;
 import br.com.devencer.update.driven.sourceupdate.UpdateData;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
-@Service
 public class UpdateProductList {
   private List<Product> allDataFromExternalSource = new ArrayList<>();
   private List<Product> allDataFromLocalSource = new ArrayList<>();

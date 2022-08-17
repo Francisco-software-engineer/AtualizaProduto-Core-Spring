@@ -31,15 +31,12 @@ public class UpdateProductList_ContentEqualsTest {
       new Product(3, "7891000064276","MUCILON ARROZ NESTLE 400G", new BigDecimal("7.99")),
       new Product(4, "7898461320323","ARROZ DOURA TIPO 1 COM 5 KG", new BigDecimal("11.5")));
 
-  LocalData localData = mock(AdapterLocalMock.class);
-  UpdateData updateData = mock(AdapterUpdateMock.class);
-  UpdateProductList updateList ;
-
+  UpdateProductList updateListFilter = new UpdateProductList();
 
   @BeforeEach
   void load() {
-
-
+    updateListFilter.setExternalData(updateProductList)
+                    .setLocalData(localProductList);
   }
 
   @Test
@@ -47,7 +44,7 @@ public class UpdateProductList_ContentEqualsTest {
   void contentEqualsTest() {
 
     try {
-      updateList.applyFilter();
+      updateListFilter.applyFilter();
       fail("Content Equals check success...");
     } catch (CoreError e) {
       assertEquals(e.getMessage(), "Error: Empty source/update table - Nothing to update.");

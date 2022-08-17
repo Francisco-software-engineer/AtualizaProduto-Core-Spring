@@ -27,8 +27,13 @@ public class UpdateProductList_EmptyUpdateTableTest {
 
   @BeforeEach
   void load() {
+<<<<<<< HEAD
+
+
+=======
     updateListFilter.setExternalData(updateProductList)
                     .setLocalData(localProductList);
+>>>>>>> feature/mapper-injection
   }
 
   @Test

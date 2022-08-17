@@ -30,6 +30,15 @@ public class UpdateProductList_UpdateListTest {
       new Product(5, "9998461320323","ARROZ", new BigDecimal("99.9"))
       );
 
+<<<<<<< HEAD
+  UpdateProductList updateListFilter = mock(UpdateProductList.class);
+
+  @BeforeEach
+  void load() {
+    updateListFilter.setExternalData(updateProductList);
+    updateListFilter.setLocalData(localProductList);
+    updateListFilter.applyFilter();
+=======
   UpdateProductList updateListFilter = new UpdateProductList();
 
   @BeforeEach
@@ -37,6 +46,7 @@ public class UpdateProductList_UpdateListTest {
     updateListFilter.setExternalData(updateProductList)
                     .setLocalData(localProductList)
                     .applyFilter();
+>>>>>>> feature/mapper-injection
   }
 
   @Test

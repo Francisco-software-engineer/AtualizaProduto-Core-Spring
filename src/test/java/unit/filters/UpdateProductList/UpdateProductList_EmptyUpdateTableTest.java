@@ -26,17 +26,12 @@ public class UpdateProductList_EmptyUpdateTableTest {
       new Product(4, "7898461320323","ARROZ DOURA TIPO 1 COM 5 KG", new BigDecimal("11.5")));
   List<Product> updateProductList = List.of();
 
-  LocalData localData;
-  UpdateData updateData;
-  UpdateProductList updateList ;
-
+  UpdateProductList updateListFilter = new UpdateProductList();
 
   @BeforeEach
   void load() {
-    localData = new AdapterLocalMock(localProductList);
-    updateData = new AdapterUpdateMock(updateProductList);
-    updateList = new UpdateProductList(updateData, localData);;
-
+    updateListFilter.setExternalData(updateProductList).
+        setLocalData(localProductList);
   }
 
   @Test
@@ -44,7 +39,7 @@ public class UpdateProductList_EmptyUpdateTableTest {
   void emptyUpdateTable() {
 
     try {
-      updateList.applyFilter();
+      updateListFilter.applyFilter();
       fail("Empty table check success...");
     } catch (CoreError e) {
       assertEquals(e.getMessage(), "Error: Empty source/update table - Nothing to update.");

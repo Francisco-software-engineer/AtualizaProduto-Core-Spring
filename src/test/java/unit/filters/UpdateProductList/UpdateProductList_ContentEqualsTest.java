@@ -38,9 +38,7 @@ public class UpdateProductList_ContentEqualsTest {
 
   @BeforeEach
   void load() {
-    localData = new AdapterLocalMock(localProductList);
-    updateData = new AdapterUpdateMock(updateProductList);
-    updateList = new UpdateProductList(updateData, localData);;
+
 
   }
 

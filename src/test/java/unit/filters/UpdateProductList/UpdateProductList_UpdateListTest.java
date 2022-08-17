@@ -1,15 +1,12 @@
 package unit.filters.UpdateProductList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import br.com.devencer.update.core.domain.dto.Report_Log_DTO;
 import br.com.devencer.update.core.domain.dto.Report_UpdatedProducts_DTO;
 import br.com.devencer.update.core.domain.entity.Product;
 import br.com.devencer.update.core.domain.filters.UpdateProductList;
-import br.com.devencer.update.driven.local.AdapterLocalMock;
-import br.com.devencer.update.driven.local.LocalData;
-import br.com.devencer.update.driven.sourceupdate.AdapterUpdateMock;
-import br.com.devencer.update.driven.sourceupdate.UpdateData;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -33,17 +30,12 @@ public class UpdateProductList_UpdateListTest {
       new Product(5, "9998461320323","ARROZ", new BigDecimal("99.9"))
       );
 
-  LocalData localData;
-  UpdateData updateData;
-  UpdateProductList updateListFilter;
-  int updateItemNumber;
-
+  UpdateProductList updateListFilter = mock(UpdateProductList.class);
 
   @BeforeEach
   void load() {
-    localData = new AdapterLocalMock(localProductList);
-    updateData = new AdapterUpdateMock(updateProductList);
-    updateListFilter = new UpdateProductList(updateData, localData);
+    updateListFilter.setExternalData(updateProductList);
+    updateListFilter.setLocalData(localProductList);
     updateListFilter.applyFilter();
   }
 

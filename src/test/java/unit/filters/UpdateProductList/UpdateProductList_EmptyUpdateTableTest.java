@@ -33,9 +33,7 @@ public class UpdateProductList_EmptyUpdateTableTest {
 
   @BeforeEach
   void load() {
-    localData = new AdapterLocalMock(localProductList);
-    updateData = new AdapterUpdateMock(updateProductList);
-    updateList = new UpdateProductList(updateData, localData);;
+
 
   }
 

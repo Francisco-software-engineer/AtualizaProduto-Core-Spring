@@ -2,15 +2,10 @@ package unit.filters.UpdateProductList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
-
 import br.com.devencer.update.core.domain.entity.Product;
 import br.com.devencer.update.core.domain.error.CoreError;
-import br.com.devencer.update.core.domain.filters.UpdateProductList;
-import br.com.devencer.update.driven.local.AdapterLocalMock;
-import br.com.devencer.update.driven.local.LocalData;
-import br.com.devencer.update.driven.sourceupdate.AdapterUpdateMock;
-import br.com.devencer.update.driven.sourceupdate.UpdateData;
+import br.com.devencer.update.core.domain.filters.Filters;
+import br.com.devencer.update.core.domain.filters.FiltersList;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +26,8 @@ public class UpdateProductList_ContentEqualsTest {
       new Product(3, "7891000064276","MUCILON ARROZ NESTLE 400G", new BigDecimal("7.99")),
       new Product(4, "7898461320323","ARROZ DOURA TIPO 1 COM 5 KG", new BigDecimal("11.5")));
 
-  UpdateProductList updateListFilter = new UpdateProductList();
+  Filters updateListFilter = Filters.create(FiltersList.UPDATE_ITEMS_FILTER);
+
 
   @BeforeEach
   void load() {
@@ -44,7 +40,7 @@ public class UpdateProductList_ContentEqualsTest {
   void contentEqualsTest() {
 
     try {
-      updateListFilter.applyFilter();
+      updateListFilter.filter();
       fail("Content Equals check success...");
     } catch (CoreError e) {
       assertEquals(e.getMessage(), "Error: Empty source/update table - Nothing to update.");

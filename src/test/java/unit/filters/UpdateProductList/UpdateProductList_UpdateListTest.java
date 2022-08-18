@@ -1,12 +1,9 @@
 package unit.filters.UpdateProductList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-
-import br.com.devencer.update.core.domain.dto.Report_Log_DTO;
-import br.com.devencer.update.core.domain.dto.Report_UpdatedProducts_DTO;
 import br.com.devencer.update.core.domain.entity.Product;
-import br.com.devencer.update.core.domain.filters.UpdateProductList;
+import br.com.devencer.update.core.domain.filters.Filters;
+import br.com.devencer.update.core.domain.filters.FiltersList;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -30,24 +27,25 @@ public class UpdateProductList_UpdateListTest {
       new Product(5, "9998461320323","ARROZ", new BigDecimal("99.9"))
       );
 
-  UpdateProductList updateListFilter = new UpdateProductList();
+  Filters updateListFilter = Filters.create(FiltersList.UPDATE_ITEMS_FILTER);
+
 
   @BeforeEach
   void load() {
     updateListFilter.setExternalData(updateProductList)
                     .setLocalData(localProductList)
-                    .applyFilter();
+                    .filter();
   }
 
   @Test
   @DisplayName("Success: A single result expected.")
   void updateListSizeTest() {
-    assertEquals(Report_Log_DTO.getInstance().getNumberOfProductsUpdated(), 1);
+    assertEquals(updateListFilter.getListDTO().size(), 1);
   }
 
   @Test
   @DisplayName("Success: Value expected")
   void updateListValueTest() {
-    assertEquals(Report_UpdatedProducts_DTO.getInstance().getListOfProductsUpdated().get(0).getBarcode(), "7898461320323");
+    assertEquals(updateListFilter.getListDTO().get(0).getBarcode(), "7898461320323");
   }
 }

@@ -50,4 +50,5 @@ public class UpdateProductList_UpdateListTest {
     void updateListValueTest() {
         assertEquals(updateListFilter.getListDTO().get(0).getBarcode(), "7898461320323");
     }
+
 }

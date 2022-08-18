@@ -2,10 +2,9 @@ package unit.filters.UpdateProductList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import br.com.devencer.update.core.domain.entity.Product;
 import br.com.devencer.update.core.domain.error.CoreError;
-import br.com.devencer.update.core.domain.filters.UpdateProductList;
+import br.com.devencer.update.core.domain.filters.Filters;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +22,8 @@ public class UpdateProductList_EmptyUpdateTableTest {
   );
   List<Product> updateProductList = List.of();
 
-  UpdateProductList updateListFilter = new UpdateProductList();
+  Filters updateListFilter = Filters.create()
+                                    .updateItemsFilter();
 
   @BeforeEach
   void load() {
@@ -36,7 +36,7 @@ public class UpdateProductList_EmptyUpdateTableTest {
   void emptyUpdateTable() {
 
     try {
-      updateListFilter.applyFilter();
+      updateListFilter.filter();
       fail("Empty table check success...");
     } catch (CoreError e) {
       assertEquals(e.getMessage(), "Error: Empty source/update table - Nothing to update.");

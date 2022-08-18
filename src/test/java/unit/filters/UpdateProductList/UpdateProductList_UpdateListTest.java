@@ -29,7 +29,6 @@ public class UpdateProductList_UpdateListTest {
 
   Filters updateListFilter = Filters.create(FiltersList.UPDATE_ITEMS_FILTER);
 
-
   @BeforeEach
   void load() {
     updateListFilter.setExternalData(updateProductList)

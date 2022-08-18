@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import br.com.devencer.update.core.domain.entity.Product;
 import br.com.devencer.update.core.domain.error.CoreError;
 import br.com.devencer.update.core.domain.filters.Filters;
+import br.com.devencer.update.core.domain.filters.FiltersList;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +23,7 @@ public class UpdateProductList_EmptyUpdateTableTest {
   );
   List<Product> updateProductList = List.of();
 
-  Filters updateListFilter = Filters.create()
-                                    .updateItemsFilter();
+  Filters updateListFilter = Filters.create(FiltersList.UPDATE_ITEMS_FILTER);
 
   @BeforeEach
   void load() {

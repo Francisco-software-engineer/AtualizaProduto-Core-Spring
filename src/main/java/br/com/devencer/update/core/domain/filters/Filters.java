@@ -5,22 +5,14 @@ import br.com.devencer.update.core.domain.entity.Product;
 import java.util.List;
 
 public class Filters{
-  Filters filter;
+  static Filters filter;
   Filters(){};
-  public static Filters create() {
+  public static Filters create(FiltersList f) {
+    filter = f.get();
     return new Filters();
   }
 
-  public Filters updateItemsFilter() {
-    filter = new UpdateProductFilter();
-    return this;
-  }
-
-  public Filters addedItemsFilter() {
-    filter = new NewProductFilter();
-    return this;
-  }
-    public Filters setExternalData(List<Product> products) {
+  public Filters setExternalData(List<Product> products) {
     filter = filter.setExternalData(products);
     return this;
   }

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import br.com.devencer.update.core.domain.entity.Product;
 import br.com.devencer.update.core.domain.error.CoreError;
 import br.com.devencer.update.core.domain.filters.Filters;
+import br.com.devencer.update.core.domain.filters.FiltersList;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -25,9 +27,8 @@ public class UpdateProductList_ContentEqualsTest {
       new Product(3, "7891000064276","MUCILON ARROZ NESTLE 400G", new BigDecimal("7.99")),
       new Product(4, "7898461320323","ARROZ DOURA TIPO 1 COM 5 KG", new BigDecimal("11.5")));
 
-  Filters updateListFilter = Filters.create()
-                                    .updateItemsFilter();
-
+  Filters updateListFilter = Filters.create(FiltersList.UPDATE_ITEMS_FILTER);
+  
   @BeforeEach
   void load() {
     updateListFilter.setExternalData(updateProductList)

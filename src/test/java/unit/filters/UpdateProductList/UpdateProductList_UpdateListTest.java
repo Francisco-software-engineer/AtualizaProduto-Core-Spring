@@ -1,10 +1,9 @@
 package unit.filters.UpdateProductList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import br.com.devencer.update.core.domain.dto.Report_Log_DTO;
-import br.com.devencer.update.core.domain.dto.Report_UpdatedProducts_DTO;
 import br.com.devencer.update.core.domain.entity.Product;
 import br.com.devencer.update.core.domain.filters.Filters;
+import br.com.devencer.update.core.domain.filters.FiltersList;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -28,8 +27,7 @@ public class UpdateProductList_UpdateListTest {
       new Product(5, "9998461320323","ARROZ", new BigDecimal("99.9"))
       );
 
-  Filters updateListFilter = Filters.create()
-                                    .updateItemsFilter();
+  Filters updateListFilter = Filters.create(FiltersList.UPDATE_ITEMS_FILTER);
 
   @BeforeEach
   void load() {
